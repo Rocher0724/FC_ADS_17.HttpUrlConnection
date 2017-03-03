@@ -1,5 +1,6 @@
 package choongyul.android.com.httpurlconnection;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -60,10 +61,15 @@ public class MainActivity extends AppCompatActivity {
 
         new AsyncTask<String,Void,String>() {
 
+            ProgressDialog dialog = new ProgressDialog(MainActivity.this);
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
-                progressLO.setVisibility(View.VISIBLE);
+
+                // 프로그래스 다이얼로그 세팅
+                dialog.setProgress(ProgressDialog.STYLE_SPINNER);
+                dialog.setMessage("불러오는중..");
+                dialog.show();
             }
 
             @Override
@@ -111,7 +117,7 @@ public class MainActivity extends AppCompatActivity {
                 String title = setTitle(result);
 
                 textTitle.setText(title);
-
+                dialog.dismiss();
 
             }
 
@@ -130,7 +136,6 @@ public class MainActivity extends AppCompatActivity {
             //String substrnig(int start, int end) : 현재 문자열 객체에서 start 부터 end 직전까지 문자열 발췌
 
             title = result.substring(startIndex + 7, endIndex);
-            progressLO.setVisibility(View.GONE);
         }
         return title;
     }
