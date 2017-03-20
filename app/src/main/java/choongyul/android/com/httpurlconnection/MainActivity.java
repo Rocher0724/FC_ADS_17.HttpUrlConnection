@@ -55,12 +55,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void getUrl(String urlString) {
 
+        // urlString = 불러올 주소
+        //
         if(!urlString.startsWith("http")) {
             urlString = "http://" + urlString;
         }
 
         new AsyncTask<String,Void,String>() {
 
+            // 정보 로딩시 progress 상태 띄워주는 dialog 창 생성
             ProgressDialog dialog = new ProgressDialog(MainActivity.this);
             @Override
             protected void onPreExecute() {
